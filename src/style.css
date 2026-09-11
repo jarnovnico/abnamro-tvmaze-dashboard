@@ -5,6 +5,8 @@
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
 
   /* don't fake bold and italic if font-family doesn't have them */
   font-synthesis: none;
@@ -18,6 +20,9 @@
 body {
   margin: 0;
   min-width: 320px;
+  background-color: #1f1e1e;
+  color: #f1eeee;
+  min-height: 100vh;
 }
 
 button,
