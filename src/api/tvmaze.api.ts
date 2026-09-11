@@ -6,6 +6,7 @@ import type {
 
 const BASE_URL = 'https://api.tvmaze.com'
 
+// fetch the shows list, but allow the caller to cancel it if needed.
 export async function getShows(
   signal?: AbortSignal,
 ): Promise<RawTVMazeShow[]> {
@@ -15,6 +16,7 @@ export async function getShows(
   )
 }
 
+// fetch a single show based on a number (id), but allow the caller to cancel it if needed.
 export async function getShow(
   id: number,
   signal?: AbortSignal,
@@ -25,6 +27,7 @@ export async function getShow(
   )
 }
 
+// fetch shows based on a string query, but allow the caller to cancel it if needed.
 export async function searchShows(
   query: string,
   signal?: AbortSignal,
@@ -34,3 +37,11 @@ export async function searchShows(
     { signal },
   )
 }
+
+/* 
+why use 'signal?: AbortSignal'?
+- the user navigates away before the request finishes
+- the user starts a new search, so the old request should stop
+- a component unmounts in a UI app
+- you want to avoid wasting time, bandwidth, or updating stale data
+*/

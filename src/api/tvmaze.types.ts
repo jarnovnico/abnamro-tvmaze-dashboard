@@ -1,4 +1,4 @@
-// I don't trust external API data... yet.”
+// I don't trust external API data... yet...”
 export interface RawTVMazeShow {
   id: number
   name: string

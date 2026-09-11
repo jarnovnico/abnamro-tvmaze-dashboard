@@ -1,14 +1,18 @@
 import type { Show } from '../shared/types/show.types'
 import type { RawTVMazeShow } from './tvmaze.types'
 
+// makes sure it returns a string
 const nullableString = (value: unknown): string | null => {
   return typeof value === 'string' ? value : null
 }
 
+// makes sure it returns a number
 const nullableNumber = (value: unknown): number | null => {
   return typeof value === 'number' ? value : null
 }
 
+
+// transforms the Raw API TVMaze Show data into a object we can use in our Apps View/Components
 export function transformerRawDataTVMazeShow(source: RawTVMazeShow): Show {
   const genres = Array.isArray(source.genres)
     ? source.genres.filter(

@@ -1,3 +1,10 @@
+/*
+This file is a small wrapper around `fetch()` that:
+- makes requests
+- throws a custom error when the response is not OK
+- parses the JSON response as type `T`
+*/
+
 export class ApiError extends Error {
   public readonly status: number;
 
@@ -8,7 +15,16 @@ export class ApiError extends Error {
   }
 }
 
+/* 
+Centralizes common `fetch()` logic:
+- one place for error handling
+- one place for JSON parsing
+- one place to add headers, auth, retries, logging, etc.
+- cleaner call sites
 
+example on how to use `const shows = await apiFetch<Show[]>("/api/shows");`
+thats less code than repeating fetch, status checks, and json() everywhere.
+*/
 export async function apiFetch<T>(
   url: string,
   options: RequestInit = {},

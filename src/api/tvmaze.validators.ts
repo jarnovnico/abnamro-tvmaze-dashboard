@@ -1,5 +1,6 @@
 import type { RawTVMazeShow } from './tvmaze.types'
 
+// we only know that `id` and `name` are present in our Raw Show Data from the api so we make sure it's there
 export function isTVMazeShow(
   value: unknown,
 ): value is RawTVMazeShow {
