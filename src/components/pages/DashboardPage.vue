@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ShowGrid from '../layouts/ShowGrid.vue';
 import { useShows } from '../../composables/useShows'
 
 const {
@@ -20,13 +21,9 @@ const {
       {{ error }}
     </p>
 
-    <ul v-else>
-      <li
-        v-for="show in shows.slice(0, 20)"
-        :key="show.id"
-      >
-        {{ show.title }}
-      </li>
-    </ul>
+    <ShowGrid
+      v-else
+      :shows="shows.slice(0, 20)"
+    />
   </main>
 </template>
