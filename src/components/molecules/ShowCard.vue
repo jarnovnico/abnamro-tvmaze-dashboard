@@ -60,6 +60,7 @@ defineProps<{
 }
 
 .show-card__content {
+  text-align: center;
   padding: 16px;
 }
 

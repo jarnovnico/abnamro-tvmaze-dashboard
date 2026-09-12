@@ -29,6 +29,9 @@ const {
       <h2>Browse: {{ selectedGenre }}</h2>
     </header>
 
+    <!-- v-model:selected-genre is short for prop: selectedGenre and event: update:selectedGenre -->
+    <!-- 1. a prop going down to the child | 2. an event coming back up to the parent -->
+    <!-- parent state -> child prop -> child emit -> parent updates state -> child gets new prop -->
     <GenreFilter
       :genres="genres"
       v-model:selected-genre="selectedGenre"

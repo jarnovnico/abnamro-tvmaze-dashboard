@@ -1,10 +1,10 @@
-import { apiFetch } from './client'
+import { apiFetch } from './client';
 import type {
   TVMazeSearchResult,
   RawTVMazeShow,
-} from './tvmaze.types'
+} from './tvmaze.types';
 
-const BASE_URL = 'https://api.tvmaze.com'
+const BASE_URL = 'https://api.tvmaze.com';
 
 // fetch the shows list, but allow the caller to cancel it if needed.
 export async function getShows(
@@ -13,8 +13,8 @@ export async function getShows(
   return apiFetch<RawTVMazeShow[]>(
     `${BASE_URL}/shows`,
     { signal },
-  )
-}
+  );
+};
 
 // fetch a single show based on a number (id), but allow the caller to cancel it if needed.
 export async function getShow(
@@ -24,8 +24,8 @@ export async function getShow(
   return apiFetch<RawTVMazeShow>(
     `${BASE_URL}/shows/${id}`,
     { signal },
-  )
-}
+  );
+};
 
 // fetch shows based on a string query, but allow the caller to cancel it if needed.
 export async function searchShows(
@@ -35,13 +35,16 @@ export async function searchShows(
   return apiFetch<TVMazeSearchResult[]>(
     `${BASE_URL}/search/shows?q=${encodeURIComponent(query)}`,
     { signal },
-  )
-}
+  );
+};
 
 /* 
-why use 'signal?: AbortSignal'?
+why use 'signal' AbortSignal?
 - the user navigates away before the request finishes
 - the user starts a new search, so the old request should stop
 - a component unmounts in a UI app
 - you want to avoid wasting time, bandwidth, or updating stale data
+
+Example: in a search query we don't want a request on every keystoke e.g. 'k, ke, key, keys, keyst, keystro'.
+We can use the `AbortController` thats built-in javascript for this purpose.
 */

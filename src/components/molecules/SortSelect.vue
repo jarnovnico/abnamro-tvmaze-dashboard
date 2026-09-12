@@ -1,24 +1,28 @@
 <script setup lang="ts">
+type SortOption = 'rating' | 'title';
+
 defineProps<{
-  modelValue: 'rating' | 'title'
+  modelValue: SortOption
 }>();
 
 const emit = defineEmits<{
   'update:modelValue': [
-    value: 'rating' | 'title',
+    value: SortOption,
   ]
 }>();
 
 const onChangeHandler = (event: Event) => {
-  const value = (event.target as HTMLSelectElement).value as 'rating' | 'title';
+  const value = (event.target as HTMLSelectElement).value as SortOption;
   emit('update:modelValue', value);
 };
 </script>
 
 <template>
-  <label>
+  <label class="sort-select" for="sort-show">
     <span>Sort by: </span>
     <select
+      id="sort-show"
+      name="sort-show"
       :value="modelValue"
       @change="onChangeHandler"
     >
@@ -32,3 +36,41 @@ const onChangeHandler = (event: Event) => {
     </select>
   </label>
 </template>
+
+<style scoped>
+.sort-select {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #8b93a3;
+}
+
+.sort-select select {
+  border: 1px solid #2a2e38;
+  border-radius: 10px;
+  padding: 10px 36px 10px 12px;
+  color: #f5f5f5;
+  background-color: #171a21;
+
+  font: inherit;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.sort-select select:hover {
+  background-color: #0a0b0e;
+  border-color: #17191f;
+  color: #fcfcfc;
+}
+
+.sort-select select:focus {
+  outline: none;
+  border-color: #4c8dff;
+  box-shadow: 0 0 0 3px rgba(76, 141, 255, 0.2);
+}
+
+.sort-select option {
+  background: #171a21;
+  color: #f5f5f5;
+}
+</style>
