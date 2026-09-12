@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { Show } from '../../shared/types/show.types.ts'
-import ShowCard from '../molecules/ShowCard.vue'
+import type { Show } from '../../shared/types/show.types.ts';
+import ShowCard from '../molecules/ShowCard.vue';
 
 defineProps<{
   shows: Show[]
-}>()
+}>();
 </script>
 
 <template>
@@ -22,6 +22,7 @@ defineProps<{
   display: grid;
   grid-template-columns:
     repeat(auto-fill, minmax(224px, 1fr));
+  grid-gap: 24px;
 }
 
 @media (max-width: 640px) {

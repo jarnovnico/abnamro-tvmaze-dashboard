@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { Show } from '../../shared/types/show.types'
+import type { Show } from '../../shared/types/show.types';
 
 defineProps<{
   show: Show
-}>()
+}>();
 </script>
 
 <template>
@@ -15,7 +15,6 @@ defineProps<{
         :alt="`${show.title} poster`"
         loading="lazy"
       >
-
       <div v-else class="show-card__placeholder">
         No image
       </div>
@@ -23,7 +22,6 @@ defineProps<{
 
     <div class="show-card__content">
       <h3>{{ show.title }}</h3>
-
       <p v-if="show.rating !== null">
         ★ {{ show.rating.toFixed(1) }}
       </p>
@@ -34,7 +32,6 @@ defineProps<{
 <style scoped>
 .show-card {
   overflow: hidden;
-  border: 1px solid #272b35;
   transition:
     transform 100ms ease,
     border-color 100ms ease;
@@ -42,13 +39,11 @@ defineProps<{
 
 .show-card:hover {
   transform: translateY(-4px);
-  border-color: #454b5a;
   cursor: pointer;
 }
 
 .show-card__image {
   aspect-ratio: 2 / 3;
-  background: #20242d;
 }
 
 .show-card__image img {
@@ -62,7 +57,6 @@ defineProps<{
   display: grid;
   height: 100%;
   place-items: center;
-  color: #8b93a3;
 }
 
 .show-card__content {
@@ -72,12 +66,10 @@ defineProps<{
 .show-card__content h3 {
   margin: 0 0 8px;
   font-size: 1.2rem;
-  color: #5E60CE;
   font-weight: initial;
 }
 
 .show-card__content p {
   margin: 0;
-  color: #c1c0c3;
 }
 </style>
