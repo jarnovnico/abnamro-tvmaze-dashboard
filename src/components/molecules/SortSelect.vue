@@ -42,7 +42,6 @@ const onChangeHandler = (event: Event) => {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #8b93a3;
 }
 
 .sort-select select {

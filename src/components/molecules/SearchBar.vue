@@ -11,12 +11,11 @@ const onInputChange = (event: Event) => {
   const value = (event.target as HTMLInputElement).value;
   emit('update:modelValue', value);
 };
-console.log('modelValue: ', props.modelValue);
 </script>
 
 <template>
   <label>
-    <span>Search TV shows</span>
+    <span>Search TV shows: </span>
     <input
       type="search"
       :value="modelValue"
