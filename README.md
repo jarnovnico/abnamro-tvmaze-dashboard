@@ -40,3 +40,16 @@ A component doesn't need to know most of this logic. E.g.: how the request works
 If you had to compare a component with a composable: 
 - UI responsibillity -> component
 - state/logic behaviour -> composable
+
+Basically reusable stateful logic!
+
+### Most important architectual concept
+What is really important to understand when using Vue:
+1. state -> 2. computed state -> 3. UI changes
+
+### watch() vs computed
+`computed` are good when (re)calculating state without side effects.
+then we use watch(): if state changed and you want to perform a side effect
+- state changed -> 1 api request
+- state changed -> 2 localStorage update
+- state changed -> 3 analytics event

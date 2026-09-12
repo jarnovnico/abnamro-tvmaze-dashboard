@@ -5,6 +5,8 @@ import { isTVMazeShow } from '../api/tvmaze.validators';
 import { transformerRawDataTVMazeShow } from '../api/tvmaze.transformer';
 import type { Show } from '../shared/types/show.types';
 
+
+// ruesable stateful logic.
 export function useShows() {
   const shows = ref<Show[]>([]);
   const loading = ref(false);
