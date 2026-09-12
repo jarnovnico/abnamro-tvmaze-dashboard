@@ -17,7 +17,7 @@ const onChangeHandler = (event: Event) => {
 
 <template>
   <label>
-    <span>Sort by</span>
+    <span>Sort by: </span>
     <select
       :value="modelValue"
       @change="onChangeHandler"

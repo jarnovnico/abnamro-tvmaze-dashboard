@@ -26,6 +26,7 @@ const {
       <SortSelect
         v-model="sortBy"
       />
+      <h2>Browse: {{ selectedGenre }}</h2>
     </header>
 
     <GenreFilter
@@ -59,6 +60,10 @@ main {
   width: min(1400px, 100% - 32px);
   margin: 0 auto;
   padding: 48px 0;
+}
+
+header {
+  margin: 0 0 32px;
 }
 
 h1 {

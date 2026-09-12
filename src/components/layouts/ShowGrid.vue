@@ -19,16 +19,46 @@ defineProps<{
 
 <style scoped>
 .show-grid {
-  display: grid;
-  grid-template-columns:
-    repeat(auto-fill, minmax(224px, 1fr));
-  grid-gap: 24px;
+  display: block;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 8px;
+  margin: 32px 0 0;
+
+  /* other/older browsers */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-@media (max-width: 640px) {
+.show-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.show-grid > * {
+  display: inline-block;
+  width: 224px;
+  margin-right: 24px;
+  vertical-align: top;
+  white-space: normal;
+}
+
+.show-grid > *:last-child {
+  margin-right: 0;
+}
+
+/* can use flex in modern browsers */
+@supports (display: flex) {
   .show-grid {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+    display: flex;
+    white-space: normal;
+    gap: 24px;
+  }
+
+  .show-grid > * {
+    display: block;
+    flex: 0 0 224px;
+    margin-right: 0;
   }
 }
 </style>
