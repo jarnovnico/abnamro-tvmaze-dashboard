@@ -3,6 +3,7 @@ import { watch } from 'vue';
 import { useRoute, RouterLink } from 'vue-router';
 import { useShow } from '../../composables/useShow';
 import ContentWrapper from '../layouts/ContentWrapper.vue';
+import Chip from '../atoms/Chip.vue';
 
 const route = useRoute();
 console.log('route', route);
@@ -83,12 +84,13 @@ react uses the dependency array, and Vue's reactive source is passed to `watch()
             v-if="show.genres.length > 0"
             class="show-detail__genres"
           >
-            <span 
+            <Chip 
               v-for="genre in show.genres"
               :key="genre"
+              as="span"
             >
               {{ genre }}
-            </span>
+            </Chip>
           </div>
 
           <div 
@@ -168,15 +170,6 @@ react uses the dependency array, and Vue's reactive source is passed to `watch()
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 28px;
-}
-
-.show-detail__genres span {
-  border: 1px solid #2a2e38;
-  border-radius: 999px;
-  padding: 6px 10px;
-  color: #c8cfda;
-  background: #171a21;
-  font-size: 0.85rem;
 }
 
 .show-detail__summary {
