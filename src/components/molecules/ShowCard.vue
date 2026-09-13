@@ -39,6 +39,11 @@ defineProps<{
 </template>
 
 <style scoped>
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .show-card {
   overflow: hidden;
   transition:
@@ -46,13 +51,22 @@ defineProps<{
     border-color 100ms ease;
 }
 
-.show-card:hover {
-  transform: translateY(-4px);
+.show-card:visited,
+.show-card:active {
+  color: inherit;
+}
+
+.show-card:hover img {
+  transform: scale(1.1);
   cursor: pointer;
 }
 
 .show-card__image {
   aspect-ratio: 2 / 3;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
 }
 
 .show-card__image img {
@@ -60,6 +74,7 @@ defineProps<{
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform .1s ease;
 }
 
 .show-card__placeholder {

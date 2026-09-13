@@ -14,9 +14,11 @@ const onInputChange = (event: Event) => {
 </script>
 
 <template>
-  <label class="search-bar">
-    <span>Search TV shows: </span>
+  <label class="search-bar" for="search-show">
+    <p class="search-bar__label">Search TV shows: </p>
     <input
+      id="search-show"
+      name="search-shows"
       type="search"
       :value="modelValue"
       placeholder="Search shows..."
@@ -30,6 +32,10 @@ const onInputChange = (event: Event) => {
 .search-bar {
   display: block;
   width: min(360px, 100%);
+}
+
+.search-bar__label {
+  margin: 0 0 8px;
 }
 
 .search-bar input {

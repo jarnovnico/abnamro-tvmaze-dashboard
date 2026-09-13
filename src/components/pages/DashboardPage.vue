@@ -54,13 +54,13 @@ const {
     </template>
 
     <template v-else>
-      <div>
+      <div class="dashboard-controls">
         <!-- 
           v-model:selected-genre is short for prop: selectedGenre and event: update:selectedGenre
           1. a prop going down to the child | 2. an event coming back up to the parent
           parent state -> child prop -> child emit -> parent updates state -> child gets new prop 
         -->
-        <h2>Browse: {{ selectedGenre }}</h2>
+        <h3 class="dashboard-controls__title">Browse: {{ selectedGenre }}</h3>
         <GenreFilter
           :genres="genres"
           v-model:selected-genre="
@@ -85,13 +85,12 @@ const {
 </template>
 
 <style scoped>
-header {
-  margin: 0 0 32px;
+.dashboard-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
-
-h1 {
-  margin: 0 0 32px;
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  line-height: 1;
+.dashboard-controls__title {
+  margin: 0;
 }
 </style>

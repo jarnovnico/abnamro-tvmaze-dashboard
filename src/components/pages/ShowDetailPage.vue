@@ -49,7 +49,7 @@ react uses the dependency array, and Vue's reactive source is passed to `watch()
         :to="{ name: 'dashboard' }"
         class="back-link"
       >
-        <span>Back to dashboard</span>
+        <span>&larr; Back to dashboard</span>
       </RouterLink>
     </header>
 
@@ -61,17 +61,17 @@ react uses the dependency array, and Vue's reactive source is passed to `watch()
       v-else-if="show"
       class="show-detail"
     >
-      <div class="show-detail__media">
+      <div class="show-detail__image-wrapper">
         <img
           v-if="show.image.original"
           :src="show.image.original"
           :alt="`${show.title} cover image`"
-          class="show-detail__cover-image"
+          class="show-detail__image"
         />
       </div>
       <div class="show-detail__body-content">
         <p v-if="show.status">{{ show.status }}</p>
-        <h1>{{ show.title }}</h1>
+        <h2>{{ show.title }}</h2>
         <div class="show-detail__meta-data">
           <p v-if="show.rating !== null">
             Rating: {{ show.rating.toFixed(1) }}
@@ -118,7 +118,6 @@ react uses the dependency array, and Vue's reactive source is passed to `watch()
 <style scoped>
 .back-link {
   display: inline-flex;
-  margin-bottom: 32px;
   color: #aeb6c5;
   text-decoration: none;
 }
@@ -136,13 +135,15 @@ react uses the dependency array, and Vue's reactive source is passed to `watch()
   align-items: start;
 }
 
-.show-detail__media {
+.show-detail__image-wrapper {
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: 24px;
   background: #171a21;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
 }
 
-.show-detail__cover-image {
+.show-detail__image {
   display: block;
   width: 100%;
   height: auto;
@@ -194,14 +195,28 @@ react uses the dependency array, and Vue's reactive source is passed to `watch()
   background: #ffd972;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 560px) {
   .show-detail {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 24px;
   }
 
-  .show-detail__cover-image {
+  .show-detail__image-wrapper { 
+    position: static;
+    max-width: 284px;
+  }
+}
+
+@media (max-width: 740px) {
+  .show-detail__image {
     width: min(100%, 360px);
+  }
+}
+
+@media (min-width: 561px) and (max-width: 820px) {
+  .show-detail {
+    grid-template-columns: 190px minmax(0, 1fr);
+    gap: 24px;
   }
 }
 </style>
