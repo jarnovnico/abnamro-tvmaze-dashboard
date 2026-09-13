@@ -60,6 +60,15 @@ usefull for two-way interaction
 ### Lifecycle hooks 
 for the cleanup of code with `onBeforeMount()` or `onMounted()`
 
+In React we are used to use useEffect() hook, and at first glance it looks similar, but in React it does more then `onMounted()`. It is used more broader and used for many side effects.
+But for Vue we use `onMounted()` for things to run after componted has been mounted in the DOM (we don't have the dependency array here).
+Then (in Vue) we can use a combination of lifecycle hooks:
+1. `onMounted()`
+2. `watch()`
+3. `watchEffect()`
+4. `onBeforeUnmount()`
+Instead of expecting one hook to do it all (like `useEffect()` can do).
+
 ## Current app architecture
 
 1. TVMaze API

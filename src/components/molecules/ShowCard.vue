@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { RouterLink } from 'vue-router';
 import type { Show } from '../../shared/types/show.types';
 
 defineProps<{
@@ -7,7 +8,15 @@ defineProps<{
 </script>
 
 <template>
-  <article class="show-card">
+  <RouterLink
+    :to="{
+      name: 'show-detail',
+      params: {
+        id: show.id,
+      },
+    }"
+    class="show-card"
+  >
     <div class="show-card__image">
       <img
         v-if="show.image.medium"
@@ -26,7 +35,7 @@ defineProps<{
         ★ {{ show.rating.toFixed(1) }}
       </p>
     </div>
-  </article>
+  </RouterLink>
 </template>
 
 <style scoped>
