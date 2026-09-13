@@ -20,28 +20,32 @@ export function useShowSearch() {
 
     // no api request on empty search input
     if (!normalizedQuery) {
-      // when .abort() is called the api request is stopped
+      // cancel any "in flight" requests
       currentController?.abort();
 
       results.value = [];
       error.value = null;
-      return; // clear search result
+      return; // clear everything and stop
     };
 
+    // cancel any previous request before starting a new api request
     currentController?.abort();
 
+    // create a new request controller for this search and marks it as the active/current request
     const controller = new AbortController();
     currentController = controller;
 
     loading.value = true;
-    error.value = null;
+    error.value = null; // clear prevouis errors
 
     try {
+      // calls the tvmaze api search endpoint with passing search query and abort signal
       const response = await searchShows(
         normalizedQuery,
         controller.signal,
       );
 
+      // take api reponse a and set it to results state, checks is valid tvmaze object, and transforms raw search result data to usable object
       results.value = response
         .filter(result => isTVMazeShow(result.show))
         .map(result => 
@@ -49,12 +53,16 @@ export function useShowSearch() {
         );
     } catch (err) {
       if (
+        // The operation was aborted, you don't want to thrown a error to the user when they abort search
+        // we just want to cancel the old request
         err instanceof DOMException &&
         err.name === 'AbortError'
       ) {
+        // if request had a err ignore it and close
         return;
       }
 
+      // store a readable error message
       error.value =
         err instanceof Error
           ? err.message
@@ -63,7 +71,7 @@ export function useShowSearch() {
       results.value = [];
     } finally {
       // comparison to check if two request are not accidentally getting blocked in finally
-      // is this still the active/current request?
+      // is this still the active/current request? then turn off loading
       if (currentController === controller) {
         loading.value = false;
       };

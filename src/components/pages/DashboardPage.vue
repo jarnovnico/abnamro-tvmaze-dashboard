@@ -25,7 +25,7 @@ const {
 // Composables can consume reactive state from other composables!
 // this is a really nice benefit of using the Composition api. it can scale very well as our app becomes more complex!
 
-const searchQuery = ref('')
+const searchQuery = ref('');
 
 const {
   results: searchResults,
@@ -59,7 +59,7 @@ watch(
 // 1.searchQuery -> 2. computed -> 3. isSearching
 const isSearching = computed(
   () => searchQuery.value.trim().length > 0,
-)
+);
 </script>
 
 <template>
