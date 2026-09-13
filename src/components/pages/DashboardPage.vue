@@ -25,73 +25,25 @@ const {
 // Composables can consume reactive state from other composables!
 // this is a really nice benefit of using the Composition api. it can scale very well as our app becomes more complex!
 
-const searchQuery = ref('');
-
 const {
+  searchQuery,
   results: searchResults,
   loading: searchLoading,
   error: searchError,
-  search,
+  isSearching,
 } = useShowSearch();
-
-// perform side effect when state changes
-// watch() -> react with a side effect
-let searchTimeout: ReturnType<typeof setTimeout> | undefined;
-
-watch(
-  searchQuery,
-  value => {
-    if (searchTimeout) {
-      clearTimeout(searchTimeout)
-    };
-
-    // 300ms is long enough to avoid a request for every keystroke, and short enough to feel responsive
-    searchTimeout = setTimeout(
-      () => {
-        search(value)
-      },
-      300
-    );
-  }
-);
-
-// is the user searcihng yet?
-// 1.searchQuery -> 2. computed -> 3. isSearching
-const isSearching = computed(
-  () => searchQuery.value.trim().length > 0,
-);
 </script>
 
 <template>
   <main>
     <header>
       <h1>TV Dashboard</h1>
-      <SortSelect
-        v-model="sortBy"
-      />
-      <h2>Browse: {{ selectedGenre }}</h2>
       <SearchBar
         v-model="searchQuery"
       />
     </header>
 
-    <!-- 
-    v-model:selected-genre is short for prop: selectedGenre and event: update:selectedGenre
-    1. a prop going down to the child | 2. an event coming back up to the parent
-    parent state -> child prop -> child emit -> parent updates state -> child gets new prop 
-    -->
-    <GenreFilter
-      :genres="genres"
-      v-model:selected-genre="selectedGenre"
-    />
-
-    <!-- 
-    TV Dashboard has two modes: 
-    1. "normal (not searching)" -> genre + rating
-    2. and isSearching -> TVMaze result
-    But are not "connected". So if you select genre and then search. You cant search within genre
-    -->
-    <section v-if="isSearching">
+    <template v-if="isSearching">
       <p v-if="searchLoading">
         Searching...
       </p>
@@ -108,9 +60,28 @@ const isSearching = computed(
         v-else
         :shows="searchResults"
       />
-    </section>
+    </template>
 
-    <section v-else>
+    <template v-else>
+      <div>
+        <!-- 
+          v-model:selected-genre is short for prop: selectedGenre and event: update:selectedGenre
+          1. a prop going down to the child | 2. an event coming back up to the parent
+          parent state -> child prop -> child emit -> parent updates state -> child gets new prop 
+        -->
+        <h2>Browse: {{ selectedGenre }}</h2>
+        <GenreFilter
+          :genres="genres"
+          v-model:selected-genre="
+            selectedGenre
+          "
+        />
+
+        <SortSelect
+          v-model="sortBy"
+        />
+      </div>
+
       <p v-if="loading">
         Loading shows...
       </p>
@@ -127,7 +98,7 @@ const isSearching = computed(
         v-else
         :shows="visibleShows"
       />
-    </section>
+    </template>
   </main>
 </template>
 
