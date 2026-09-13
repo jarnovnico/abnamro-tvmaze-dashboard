@@ -32,6 +32,7 @@ const {
   error: searchError,
   isSearching,
 } = useShowSearch();
+// All logic should be seperated from our pages/views!
 </script>
 
 <template>
@@ -76,7 +77,6 @@ const {
             selectedGenre
           "
         />
-
         <SortSelect
           v-model="sortBy"
         />

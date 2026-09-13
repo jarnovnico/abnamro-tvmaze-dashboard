@@ -6,7 +6,7 @@ import { transformerRawDataTVMazeShow } from '../api/tvmaze.transformer';
 import type { Show } from '../shared/types/show.types';
 
 
-// ruesable stateful logic.
+// ruesable stateful logic for fetching + validating(typeguard) raw Shows data and transformering it in more usable object for our views
 export function useShows() {
   const shows = ref<Show[]>([]);
   const loading = ref(false);
@@ -32,6 +32,7 @@ export function useShows() {
     }
   }
 
+  // after the component has been mounted then fetchShows
   onMounted(fetchShows);
 
   return {

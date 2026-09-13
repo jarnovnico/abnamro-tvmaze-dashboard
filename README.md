@@ -53,3 +53,27 @@ then we use watch(): if state changed and you want to perform a side effect
 - state changed -> 1 api request
 - state changed -> 2 localStorage update
 - state changed -> 3 analytics event
+
+### v-model
+usefull for two-way interaction
+
+### Lifecycle hooks 
+for the cleanup of code with `onBeforeMount()` or `onMounted()`
+
+## Current app architecture
+
+1. TVMaze API
+2. api/client.ts
+3. tvmaze.api.ts
+4. validator/typeguard + raw data transformer
+5. type Show
+
+then we either go -> useShows -> useShowFilters -> DashboardPage: 
+1. filter
+2. sort 
+3. ShowGrid -> ShowCard
+
+or from 5. we go -> useShowSearch -> SearchBar
+
+all stateful logic seperated in reusable composables that handle state, api requests in small reusable "wrappers" with error handling, validation, data transformation.
+Then our components/pages/view stay "stupid".
