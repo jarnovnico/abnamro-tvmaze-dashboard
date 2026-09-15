@@ -1,8 +1,26 @@
-# Vue 3 + TypeScript + Vite
+# ABN AMRO TVMaze API Show Dashboard
+A "budget IMDB" dashboard for browsing shows, filtering by genre, sorting by rating/title, searching by show name, and viewing individual show details.
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+- Vue 3
+- TypeScript
+- Vite
+- Vue Router
+- Vitest
+- fetch()
+- CSS
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## app setup
+- node.js 22+
+- npm
+
+## run the project:
+- `npm install`
+- `npm run dev`
+
+Then go to: `http://localhost:5173`
+
+Run unit tests (once) with: `npm run test:run`
+Create production build: `npm run build`
 
 ## Current app architecture
 1. TVMaze API
@@ -191,3 +209,14 @@ Bottom: Unit tests
 4. our apps type model
 5. composable
 6. component
+
+### nices to haves
+- Tailwind (for theming configuration to easily main styles, and switch styles in the future)
+- More PrimeVue (I love making my own components but when you work in a big team or organization is makes more sense to use a design system)
+- More CSC variables and other design tokens stored in central place (now it's all other the place but because of lack of time I choose regular CSS)
+- sanitize HTML in ShowDetailPage.vue
+Currently we are not rendering HTML directly in the DOM from the API because thats safer
+But it would be normal to then sanatize the HTML before rendering it!
+- E2E testing with Playwright
+- Component testing
+- Animations?

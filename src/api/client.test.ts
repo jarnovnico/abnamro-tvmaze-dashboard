@@ -51,6 +51,11 @@ describe('api fetch client', () => {
 
   // all 200's return json. all non 200's throw the `ApiError`
   it('throws ApiError when the response is not successful', async () => {
+    vi.spyOn(globalThis, 'fetch')
+      .mockResolvedValue(
+        new Response(null, { status: 404 })
+      );
+
     const promise = apiFetch('https://example.com/missing');
 
     await expect(promise).rejects.toBeInstanceOf(ApiError);
@@ -64,11 +69,10 @@ describe('api fetch client', () => {
   // ensuring our infrastructure tells the caller was as specifically a 429
   // useful later when we improve retry/backoff behavior
   it('preserves a 429 status code', async () => {
-    const fetchMock = vi
-        .spyOn(globalThis, 'fetch')
-        .mockResolvedValue(
-          new Response(null, { status: 429 }),
-        );
+    vi.spyOn(globalThis, 'fetch')
+      .mockResolvedValue(
+        new Response(null, { status: 429 })
+      );
 
     await expect(apiFetch('https://example.com/shows')).rejects.toMatchObject({
       status: 429,
