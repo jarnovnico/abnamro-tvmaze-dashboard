@@ -58,7 +58,7 @@ const onInputChange = (event: Event) => {
   box-shadow: 0 0 0 3px rgba(76, 141, 255, 0.2);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .search-bar {
     width: 100%;
   }

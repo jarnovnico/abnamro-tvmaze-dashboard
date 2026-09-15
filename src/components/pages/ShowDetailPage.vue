@@ -207,7 +207,7 @@ react uses the dependency array, and Vue's reactive source is passed to `watch()
   }
 }
 
-@media (max-width: 740px) {
+@media (max-width: 768px) {
   .show-detail__image {
     width: min(100%, 360px);
   }

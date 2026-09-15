@@ -50,4 +50,23 @@ const onAllClick = () => {
   justify-content: center;
   gap: 8px;
 }
+
+@media (max-width: 768px) {
+  .genre-filter {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 4px;
+
+    /* older/other borwes support */
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+  }
+
+  .genre-filter::-webkit-scrollbar {
+    display: none;
+  }
+}
 </style>

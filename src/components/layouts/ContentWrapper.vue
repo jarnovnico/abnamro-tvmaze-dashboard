@@ -10,7 +10,7 @@ main {
   margin: 0 auto;
   padding: 48px 0;
 }
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   main {
     width: min(100% - 20px, 1400px);
     padding: 28px 0;

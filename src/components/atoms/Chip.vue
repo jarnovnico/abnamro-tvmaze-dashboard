@@ -58,6 +58,7 @@ const clickHandler = (event: MouseEvent) => {
 
 <style scoped>
 .chip {
+  flex: 0 0 auto;
   border-radius: 24px;
   border: 1px solid #686868;
   background-color: #e9e9e9;
