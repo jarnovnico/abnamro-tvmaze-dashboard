@@ -1,5 +1,5 @@
 <script setup lang="ts">
-type SortOption = 'rating' | 'title';
+import type { SortOption } from '../../composables/useShowFilters';
 
 defineProps<{
   modelValue: SortOption
@@ -26,13 +26,10 @@ const onChangeHandler = (event: Event) => {
       :value="modelValue"
       @change="onChangeHandler"
     >
-      <option value="rating">
-        Rating
-      </option>
-
-      <option value="title">
-        Title
-      </option>
+      <option value="rating-desc">Top rating</option>
+      <option value="rating-asc">Lowest rated</option>
+      <option value="title-asc">Title A-Z</option>
+      <option value="title-desc">Title Z-A</option>
     </select>
   </label>
 </template>

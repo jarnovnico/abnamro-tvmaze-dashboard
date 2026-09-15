@@ -2,7 +2,7 @@ import { computed, ref, type Ref } from 'vue';
 
 import type { Show } from '../shared/types/show.types';
 
-type SortOption = 'rating' | 'title';
+export type SortOption = 'rating-desc' | 'rating-asc' | 'title-asc' | 'title-desc';
 
 /*
 the architecture:
@@ -20,7 +20,7 @@ export function useShowFilters(
 ) {
   // state user can change
   const selectedGenre = ref('All');
-  const sortBy = ref<SortOption>('rating');
+  const sortBy = ref<SortOption>('rating-desc');
 
   const genres = computed(() => {
     // create big array with all the genres
@@ -46,15 +46,18 @@ export function useShowFilters(
     // for visibleShows we don't mutate the computed array we copy it and sort the copy
     return [...filteredShows.value].sort(
       (a, b) => {
-        if (sortBy.value === 'rating') {
-          return (
-            (b.rating ?? 0) -
-            (a.rating ?? 0)
-          )
-        };
-
-        return a.title.localeCompare(b.title);
-      },
+      switch (sortBy.value) {
+        case 'rating-asc':
+          return (a.rating ?? -1) - (b.rating ?? -1);
+        case 'title-asc':
+          return a.title.localeCompare(b.title);
+        case 'title-desc':
+          return b.title.localeCompare(a.title);
+        case 'rating-desc':
+        default:
+          return (b.rating ?? -1) - (a.rating ?? -1);
+      }
+    }
     );
   });
 
