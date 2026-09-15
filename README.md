@@ -6,6 +6,7 @@ A "budget IMDB" dashboard for browsing shows, filtering by genre, sorting by rat
 - Vite
 - Vue Router
 - Vitest
+- PrimeVue (select)
 - fetch()
 - CSS
 
