@@ -1,6 +1,13 @@
 import type { Show } from '../shared/types/show.types';
 import type { RawTVMazeShow } from './tvmaze.types';
 
+// Our transformer helper doesn't "transform" that much differently compared to the Raw Data, but it's a good habit to have it
+// It's main job is to project our app from external data
+// We don't want to break our view
+
+// without this transformer: vue component -> needs to understand TVMaze's edgecases
+// and with the transformer: api raw data -> transformer -> clean data -> vue view
+
 // makes sure it returns a string
 const nullableString = (value: unknown): string | null => {
   return typeof value === 'string' ? value : null;

@@ -147,3 +147,47 @@ But don't chain `watch()` lifecyclehooks when state change. Instead do:
 3. computed C
 Like our `selectedGenre` -> `filteredShows` -> `visibleShows`.
 No chain of events required!
+
+## Unit tests
+Currently only parts of our app that are critial:
+- validator
+- transformer
+- filtering
+- HTTP errors
+Goal is not 100% coverage, but 100% confident our app works
+
+Nice to have: testing search composable, but it would require more complicated setup.
+Watch, timers, AbortController, lifescyle, async behaviour, etc
+
+After this we could also add DOM validation test, but those are low prio if you ask me.
+
+### testing pyramid
+But our perfered testing would look like:
+
+Top: E2E with Playwright (or cypress)
+- open dashboard
+- use search
+- select a show
+- open the detail page
+
+Middel part: Component testing
+- SearchBar
+- ShowCard
+- GenreFilter
+- ShowDetailPage
+
+Bottom: Unit tests
+- transformers
+- validators
+- filters
+- utils
+- api client
+- composables
+
+### most important thing to test
+1. external data
+2. validator
+3. raw data transformer
+4. our apps type model
+5. composable
+6. component
