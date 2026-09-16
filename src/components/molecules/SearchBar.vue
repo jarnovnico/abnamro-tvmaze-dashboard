@@ -40,22 +40,22 @@ const onInputChange = (event: Event) => {
 
 .search-bar input {
   width: 100%;
-  border: 1px solid #2a2e38;
+  border: 1px solid var(--color-border-selected);
   border-radius: 12px;
   padding: 12px 16px;
-  color: #f5f5f5;
-  background: #171a21;
+  color: var(--color-text-primary-selected);
+  background-color: var(--color-primary-selected);
   outline: none;
 }
 
 .search-bar input::placeholder {
-  color: #747d91;
+  color: var(--color-text-placeholder);
 }
 
 .search-bar input:focus {
   outline: none;
-  border-color: #4c8dff;
-  box-shadow: 0 0 0 3px rgba(76, 141, 255, 0.2);
+  border-color: var(--color-focus);
+  box-shadow: var(--shadow-focus);
 }
 
 @media (max-width: 768px) {

@@ -61,11 +61,20 @@ a {
   cursor: pointer;
 }
 
+.show-card:hover .show-card__image {
+  border: 1px solid var(--color-border-hover);
+}
+
+.show-card:hover p,
+.show-card:hover h3 {
+  color: var(--color-text-primary-active);
+}
+
 .show-card__image {
   aspect-ratio: 2 / 3;
   border-radius: 24px;
   overflow: hidden;
-  border: 1px solid var(--border);
+  border: 1px solid var(--color-border);
   box-shadow: var(--shadow);
 }
 

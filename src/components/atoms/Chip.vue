@@ -60,9 +60,9 @@ const clickHandler = (event: MouseEvent) => {
 .chip {
   flex: 0 0 auto;
   border-radius: 24px;
-  border: 1px solid #686868;
-  background-color: #e9e9e9;
-  color: #2f2f2f;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-primary);
+  color: var(--color-text-primary);
   padding: 6px 10px;
   font-size: 0.85rem;
   transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
@@ -70,33 +70,33 @@ const clickHandler = (event: MouseEvent) => {
 
 .chip:hover {
   cursor: pointer;
-  border: 1px solid #505050;
-  background-color: #d8d6d6;
-  color: #1e1d1d;
+  border: 1px solid var(--color-border-hover);
+  background-color: var(--color-primary-hover);
+  color: var(--color-text-primary-hover);
 }
 
 .chip:active {
-  background-color: #fff;
-  border: 1px solid #e0e0e0;
-  color: #1e1d1d;
+  background-color: var(--color-primary-light);
+  border: 1px solid var(--color-boder-light);
+  color: var(--color-text-primary-hover);
 }
 
 .chip--active {
-  color: #f5f5f5;
-  background-color: #171a21;
-  border: 1px solid #2a2e38;
+  color: var(--color-text-primary-selecte);
+  background-color: var(--color-primary-selected);
+  border: 1px solid var(--color-border-selected);
 }
 
 .chip--active:hover {
-  color: #fcfcfc;
-  background-color: #0a0b0e;
-  border: 1px solid #17191f;
+  color: var(--color-text-primary-active-hover);
+  background-color: var(--color-primary-active-hover);
+  border: 1px solid var(--color-border-active-hover);
 }
 
 .chip:focus {
   outline: none;
-  border-color: #4c8dff;
-  box-shadow: 0 0 0 3px rgba(76, 141, 255, 0.2);
+  border-color: var(--color-focus);
+  box-shadow: var(--shadow-focus);
 }
 
 .chip--non-interactive {

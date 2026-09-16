@@ -118,12 +118,12 @@ react uses the dependency array, and Vue's reactive source is passed to `watch()
 <style scoped>
 .back-link {
   display: inline-flex;
-  color: #aeb6c5;
+  color: var(--color-secondary);
   text-decoration: none;
 }
 
 .back-link:hover {
-  color: #ffffff;
+  color: var(--color-secondary-hover);
 }
 
 .show-detail {
@@ -138,7 +138,7 @@ react uses the dependency array, and Vue's reactive source is passed to `watch()
 .show-detail__image-wrapper {
   overflow: hidden;
   border-radius: 24px;
-  background: #171a21;
+  background: var(--color-primary-selected);
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
 }
@@ -163,7 +163,7 @@ react uses the dependency array, and Vue's reactive source is passed to `watch()
   flex-wrap: wrap;
   gap: 12px;
   margin-bottom: 20px;
-  color: #aeb6c5;
+  color: var(--color-text-primary-light);
 }
 
 .show-detail__genres {
@@ -175,7 +175,7 @@ react uses the dependency array, and Vue's reactive source is passed to `watch()
 
 .show-detail__summary {
   max-width: 800px;
-  color: #c4cad5;
+  color: var(--color-secondary);
   font-size: 1.05rem;
   line-height: 1.8;
 }
@@ -185,14 +185,15 @@ react uses the dependency array, and Vue's reactive source is passed to `watch()
   margin-top: 32px;
   border-radius: 10px;
   padding: 11px 16px;
-  color: #13151a;
-  background: #f4c95d;
+  color: var(--color-text-primary);
+  background: var(--color-highlight);
   font-weight: 700;
   text-decoration: none;
 }
 
 .button:hover {
-  background: #ffd972;
+  background: var(--color-highlight-hover);
+  color: var(--color-text-primary-hover);
 }
 
 @media (max-width: 560px) {
