@@ -42,84 +42,165 @@ react uses the dependency array, and Vue's reactive source is passed to `watch()
 </script>
 
 <template>
-  <ContentWrapper>
-    <header>
-      <h1>Show Detail</h1>
-      <RouterLink 
-        :to="{ name: 'dashboard' }"
-        class="back-link"
-      >
-        <span>&larr; Back to dashboard</span>
-      </RouterLink>
-    </header>
+  <div class="show-detail-page">
+    <section
+      v-if="show"
+      class="show-hero"
+      :style="{
+        '--hero-image': show.image.original
+          ? `url('${show.image.original}')`
+          : 'none',
+      }"
+    >
+      <div class="show-hero__backdrop" />
 
-    <p v-if="loading">Loading...</p>
+      <ContentWrapper>
+        <div class="show-hero__content">
+          <h1>Show Detail</h1>
+          <RouterLink
+            :to="{ name: 'dashboard' }"
+            class="back-link"
+          >
+            <span>&larr; Back to dashboard</span>
+          </RouterLink>
+
+          <article 
+            class="show-detail"
+          >
+            <div class="show-detail__image-wrapper">
+              <img
+                v-if="show.image.original"
+                :src="show.image.original"
+                :alt="`${show.title} cover image`"
+                class="show-detail__image"
+              />
+            </div>
+            <div class="show-detail__body-content">
+              <p v-if="show.status">Show status: {{ show.status }}</p>
+              <h2>{{ show.title }}</h2>
+              <div class="show-detail__meta-data">
+                <p v-if="show.rating !== null" class="show-detail__rating">
+                  Rating: ★ {{ show.rating.toFixed(1) }}
+                </p>
+                <p v-if="show.language">Language: {{ show.language }}</p>
+                <p v-if="show.runtime">Runtime: {{ show.runtime }} min</p>
+                <p v-if="show.premiered">Release date: {{ show.premiered }}</p>
+
+                <div 
+                  v-if="show.genres.length > 0"
+                  class="show-detail__genres"
+                >
+                  <Chip 
+                    v-for="genre in show.genres"
+                    :key="genre"
+                    as="span"
+                  >
+                    {{ genre }}
+                  </Chip>
+                </div>
+
+                <div 
+                  v-if="show.summary"
+                  class="show-detail__summary"
+                >
+                  {{ show.summary }}
+                </div>
+
+                <a
+                  v-if="show.officialSite"
+                  :href="show.officialSite"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="button"
+                >
+                  Official website
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </ContentWrapper>
+    </section>
+
+    <p v-else-if="loading">Loading...</p>
     <!-- if user navigated to /abc instead of /123 we show this error (for now!) -->
     <p v-else-if="error">{{ error }}</p>
-
-    <article 
-      v-else-if="show"
-      class="show-detail"
-    >
-      <div class="show-detail__image-wrapper">
-        <img
-          v-if="show.image.original"
-          :src="show.image.original"
-          :alt="`${show.title} cover image`"
-          class="show-detail__image"
-        />
-      </div>
-      <div class="show-detail__body-content">
-        <p v-if="show.status">{{ show.status }}</p>
-        <h2>{{ show.title }}</h2>
-        <div class="show-detail__meta-data">
-          <p v-if="show.rating !== null">
-            Rating: {{ show.rating.toFixed(1) }}
-          </p>
-          <p v-if="show.language">{{ show.language }}</p>
-          <p v-if="show.runtime">{{ show.runtime }} min</p>
-          <p v-if="show.premiered">{{ show.premiered }}</p>
-
-          <div 
-            v-if="show.genres.length > 0"
-            class="show-detail__genres"
-          >
-            <Chip 
-              v-for="genre in show.genres"
-              :key="genre"
-              as="span"
-            >
-              {{ genre }}
-            </Chip>
-          </div>
-
-          <div 
-            v-if="show.summary"
-            class="show-detail__summary"
-          >
-            {{ show.summary }}
-          </div>
-
-          <a
-            v-if="show.officialSite"
-            :href="show.officialSite"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="button"
-          >
-            Official website
-          </a>
-        </div>
-      </div>
-    </article>
-  </ContentWrapper>
+  </div>
 </template>
 
 <style scoped>
+.show-detail-page {
+  min-height: 100vh;
+  background: var(--bg-dark-hard);
+}
+
+.show-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  min-height: 720px;
+}
+
+.show-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+
+  background-image: var(--hero-image);
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  filter: blur(2px); /* not too much blur. bad for performance! */
+  transform: scale(1.03);
+}
+
+.show-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(15, 17, 21, 0.15) 0%,
+      rgba(15, 17, 21, 0.35) 25%,
+      rgba(15, 17, 21, 0.78) 55%,
+      var(--bg-dark-hard) 100%
+    );
+}
+
+.show-hero__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background:
+    linear-gradient(
+      to right,
+      rgba(15, 17, 21, 0.9) 0%,
+      rgba(15, 17, 21, 0.55) 45%,
+      rgba(15, 17, 21, 0.3) 100%
+    );
+}
+
+.show-hero__content {
+  width: min(1400px, 100% - 32px);
+  min-height: 720px;
+  margin: 0;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
 .back-link {
   display: inline-flex;
   color: var(--color-secondary);
   text-decoration: none;
+  margin-bottom: 16px;
 }
 
 .back-link:hover {
@@ -137,6 +218,7 @@ react uses the dependency array, and Vue's reactive source is passed to `watch()
 
 .show-detail__image-wrapper {
   overflow: hidden;
+  position: relative;
   border-radius: 24px;
   background: var(--color-primary-selected);
   border: 1px solid var(--border);
@@ -147,6 +229,18 @@ react uses the dependency array, and Vue's reactive source is passed to `watch()
   display: block;
   width: 100%;
   height: auto;
+}
+
+.show-detail__rating {
+  font-size: .8rem;
+  font-weight: 800;
+  color: var(--color-text-primary);
+  border-radius: 24px;
+  padding: 4px 12px;
+  background-color: var(--color-highlight); 
+  backdrop-filter: blur(8px);
+  margin: 0;
+  width: fit-content;
 }
 
 .show-detail__content {
@@ -203,14 +297,26 @@ react uses the dependency array, and Vue's reactive source is passed to `watch()
   }
 
   .show-detail__image-wrapper { 
-    position: static;
     max-width: 284px;
   }
 }
 
 @media (max-width: 768px) {
+  .show-hero {
+    min-height: auto;
+  }
+
+  .show-hero__content {
+    min-height: auto;
+  }
+
+
   .show-detail__image {
     width: min(100%, 360px);
+  }
+
+  .show-detail__content {
+    padding-bottom: 0;
   }
 }
 

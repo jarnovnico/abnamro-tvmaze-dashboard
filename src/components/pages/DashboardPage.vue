@@ -36,59 +36,75 @@ const {
 </script>
 
 <template>
-  <ContentWrapper>
-    <header>
-      <h1>TV Dashboard</h1>
-      <SearchBar v-model="searchQuery" />
-    </header>
+  <div class="dashboard-page">
+    <ContentWrapper>
+      <header>
+        <h1>TV Dashboard</h1>
+        <SearchBar v-model="searchQuery" />
+      </header>
 
-    <template v-if="isSearching">
-      <p v-if="searchLoading">Searching...</p>
-      <p v-else-if="searchError">{{ searchError }}</p>
-      <p v-else-if="searchResults.length === 0">No shows found.</p>
+      <template v-if="isSearching">
+        <p v-if="searchLoading">Searching...</p>
+        <p v-else-if="searchError">{{ searchError }}</p>
+        <p v-else-if="searchResults.length === 0">No shows found.</p>
 
-      <ShowGrid
-        v-else
-        :shows="searchResults"
-      />
-    </template>
-
-    <template v-else>
-      <div class="dashboard-controls">
-        <!-- 
-          v-model:selected-genre is short for prop: selectedGenre and event: update:selectedGenre
-          1. a prop going down to the child | 2. an event coming back up to the parent
-          parent state -> child prop -> child emit -> parent updates state -> child gets new prop 
-        -->
-        <h3 class="dashboard-controls__title">Browse: {{ selectedGenre }}</h3>
-        <GenreFilter
-          :genres="genres"
-          v-model:selected-genre="
-            selectedGenre
-          "
+        <ShowGrid
+          v-else
+          :shows="searchResults"
         />
-        <SortSelect
-          v-model="sortBy"
+      </template>
+
+      <template v-else>
+        <div class="dashboard-controls">
+          <!-- 
+            v-model:selected-genre is short for prop: selectedGenre and event: update:selectedGenre
+            1. a prop going down to the child | 2. an event coming back up to the parent
+            parent state -> child prop -> child emit -> parent updates state -> child gets new prop 
+          -->
+          <div class="dashboard-controls__title-wrapper">
+            <span>Browse: </span>
+            <h3 class="dashboard-controls__title">{{ selectedGenre }}</h3>
+          </div>
+          <GenreFilter
+            :genres="genres"
+            v-model:selected-genre="
+              selectedGenre
+            "
+          />
+          <SortSelect
+            v-model="sortBy"
+          />
+        </div>
+
+        <p v-if="loading">Loading shows...</p>
+        <p v-else-if="error">{{ error }}</p>
+        <p v-else-if="visibleShows.length === 0">No shows found.</p>
+
+        <ShowGrid
+          v-else
+          :shows="visibleShows"
         />
-      </div>
-
-      <p v-if="loading">Loading shows...</p>
-      <p v-else-if="error">{{ error }}</p>
-      <p v-else-if="visibleShows.length === 0">No shows found.</p>
-
-      <ShowGrid
-        v-else
-        :shows="visibleShows"
-      />
-    </template>
-  </ContentWrapper>
+      </template>
+    </ContentWrapper>
+  </div>
 </template>
 
 <style scoped>
+.dashboard-page {
+  min-height: 100vh;
+  background: var(--gadient-primary);
+  padding: 0 16px;
+}
 .dashboard-controls {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+.dashboard-controls__title-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 8px;
 }
 .dashboard-controls__title {
   margin: 0;

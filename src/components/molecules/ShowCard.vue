@@ -31,9 +31,10 @@ defineProps<{
 
     <div class="show-card__content">
       <h3>{{ show.title }}</h3>
-      <p v-if="show.rating !== null">
+      <p v-if="show.rating !== null" class="show-card__rating">
         ★ {{ show.rating.toFixed(1) }}
       </p>
+      <p>{{ show.genres.slice(0, 2).join(' - ') || 'TV show' }}</p>
     </div>
   </RouterLink>
 </template>
@@ -46,6 +47,7 @@ a {
 
 .show-card {
   overflow: hidden;
+  position: relative;
   transition:
     transform 100ms ease,
     border-color 100ms ease;
@@ -68,6 +70,19 @@ a {
 .show-card:hover p,
 .show-card:hover h3 {
   color: var(--color-text-primary-active);
+}
+
+.show-card__rating {
+  font-size: .8rem;
+  font-weight: 800;
+  color: var(--color-highlight);
+  border-radius: 24px;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 8px;
+  background: var(--bg-dark-transparent); 
+  backdrop-filter: blur(8px); 
 }
 
 .show-card__image {
